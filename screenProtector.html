@@ -53,7 +53,7 @@
 			});
 		}
 		setInterval(function(){
-			console.log(color.r+','+color.g+','+color.b);
+			//console.log(color.r+','+color.g+','+color.b);
 			gc.clearRect(0,0,winW,winH);
 			var arr = [];
 			for(var i=0;i<N;i++){
@@ -129,7 +129,7 @@
 					clearInterval(timerR);
 					moveR(start);
 				}
-			},16);
+			},100);
 		}
 		function moveG(start){
 			//console.log('start---'+start);
@@ -157,7 +157,7 @@
 					clearInterval(timerG);
 					moveG(start);
 				}
-			},16);
+			},100);
 		}
 		function moveB(start){
 			//console.log('start---'+start);
@@ -185,7 +185,7 @@
 					clearInterval(timerB);
 					moveB(start);
 				}
-			},30);
+			},100);
 		}
 	};
 	</script>
