@@ -30,6 +30,18 @@
 		var N = 5;
 		var len = 20;
 		var oldPos = [];
+		var r = rnd(0,256);
+		var color = {
+			r: rnd(0,256),
+			g: rnd(0,256),
+			b: rnd(0,256)
+		};
+		var timerR = null;
+		var timerG = null;
+		var timerB = null;
+		moveR(color.r);
+		moveG(color.g);
+		moveB(color.b);
 		//创建随机点
 		var aPoint = [];
 		for(var i=0;i<N;i++){
@@ -41,6 +53,7 @@
 			});
 		}
 		setInterval(function(){
+			console.log(color.r+','+color.g+','+color.b);
 			gc.clearRect(0,0,winW,winH);
 			var arr = [];
 			for(var i=0;i<N;i++){
@@ -63,7 +76,7 @@
 			while(oldPos.length>len)oldPos.shift();
 			//画主线
 			gc.beginPath();
-			gc.strokeStyle = '#0f9';
+			gc.strokeStyle = 'rgb('+color.r+','+color.g+','+color.b+')';
 			gc.moveTo(aPoint[0].x,aPoint[0].y);
 			for(var i=1;i<N;i++){
 				gc.lineTo(aPoint[i].x,aPoint[i].y);
@@ -74,7 +87,7 @@
 			for(var i=0;i<oldPos.length;i++){
 				gc.beginPath();
 				var opacity = i/oldPos.length*0.8;
-				gc.strokeStyle = 'rgba(0,255,153,'+opacity+')';
+				gc.strokeStyle = 'rgba('+color.r+','+color.g+','+color.b+','+opacity+')';
 				gc.moveTo(oldPos[i][0].x,oldPos[0].y);
 				for(var j=0;j<N;j++){
 					gc.lineTo(oldPos[i][j].x,oldPos[i][j].y);
@@ -85,9 +98,94 @@
 		},16);
 		function drawPoint(point){
 			gc.beginPath();
-			gc.fillStyle = '#fff';
+			gc.fillStyle = 'rgb('+color.r+','+color.g+','+color.b+')';
 			gc.fillRect(point.x,point.y,1,1);
 			gc.closePath();
+		}
+		//测试颜色
+		function moveR(start){
+			//console.log('start---'+start);
+			clearInterval(timerR);
+			var iTarget = rnd(0,256);
+			//console.log('iTarget---'+iTarget);
+			var dis = iTarget-start;
+			//console.log('dis---'+dis);
+			var n = 0;
+			//console.log('n---'+n);
+			var cur = dis/Math.abs(dis);
+			//console.log('cur---'+cur);
+			timerR = setInterval(function(){
+				n++;
+				start += cur;
+				color.r = start;
+				if(start==255){
+					cur *= -1;
+				}
+				if(start==0){
+					cur *= -1;
+				}
+				if(n==Math.abs(dis)){
+					//alert(1);
+					clearInterval(timerR);
+					moveR(start);
+				}
+			},16);
+		}
+		function moveG(start){
+			//console.log('start---'+start);
+			clearInterval(timerG);
+			var iTarget = rnd(0,256);
+			//console.log('iTarget---'+iTarget);
+			var dis = iTarget-start;
+			//console.log('dis---'+dis);
+			var n = 0;
+			//console.log('n---'+n);
+			var cur = dis/Math.abs(dis);
+			//console.log('cur---'+cur);
+			timerG = setInterval(function(){
+				n++;
+				start += cur;
+				color.g = start;
+				if(start==255){
+					cur *= -1;
+				}
+				if(start==0){
+					cur *= -1;
+				}
+				if(n==Math.abs(dis)){
+					//alert(1);
+					clearInterval(timerG);
+					moveG(start);
+				}
+			},16);
+		}
+		function moveB(start){
+			//console.log('start---'+start);
+			clearInterval(timerB);
+			var iTarget = rnd(0,256);
+			//console.log('iTarget---'+iTarget);
+			var dis = iTarget-start;
+			//console.log('dis---'+dis);
+			var n = 0;
+			//console.log('n---'+n);
+			var cur = dis/Math.abs(dis);
+			//console.log('cur---'+cur);
+			timerB = setInterval(function(){
+				n++;
+				start += cur;
+				color.b = start;
+				if(start==255){
+					cur *= -1;
+				}
+				if(start==0){
+					cur *= -1;
+				}
+				if(n==Math.abs(dis)){
+					//alert(1);
+					clearInterval(timerB);
+					moveB(start);
+				}
+			},16);
 		}
 	};
 	</script>
