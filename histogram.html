@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>histogram</title>
+	<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		overflow: hidden;
+	}
+	canvas {
+		display: block;
+		border: 1px solid #000;
+		box-sizing: border-box;
+		padding: 10px;
+		margin: 100px auto;
+	}
+	</style>
+	<script>
+	'use strict';
+	function rnd(n,m){
+		return parseInt(n+Math.random()*(m-n));
+	}
+	window.onload = function(){
+		var oC = document.getElementById('c1');
+		var gc = oC.getContext('2d');
+		var arr = [67,321,287,34,150,210,400,340,rnd(0,401),rnd(0,401),rnd(0,401),rnd(0,401)];
+		var space = oC.width/(arr.length*4-1);
+		var w = space*3;
+		var max = Math.max.apply(null,arr);
+		for(var i=0;i<arr.length;i++){
+			var h = arr[i]/max*oC.height;
+			gc.beginPath();
+			gc.fillStyle = 'rgb('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')';
+			gc.fillRect(i*(w+space),oC.height-h,w,h);
+		}
+	};
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="500"></canvas>	
+</body>
+</html>
